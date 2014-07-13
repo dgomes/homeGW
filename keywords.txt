@@ -1,0 +1,33 @@
+#######################################
+# Syntax Coloring Map For homeGW
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+homeGW	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setup	KEYWORD2
+getTemperature	KEYWORD2
+getHumidity	KEYWORD2
+getChannel	KEYWORD2
+isValide  KEYWORD2
+available  KEYWORD2
+clear	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+MAX_CHANGES	LITERAL1
+
