@@ -7,6 +7,8 @@
 #######################################
 
 homeGW	KEYWORD1
+weather	KEYWORD1
+door	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -16,7 +18,8 @@ setup	KEYWORD2
 getTemperature	KEYWORD2
 getHumidity	KEYWORD2
 getChannel	KEYWORD2
-isValide  KEYWORD2
+isValidWeather  KEYWORD2
+getPacket	KEYWORD2
 available  KEYWORD2
 clear	KEYWORD2
 
@@ -30,4 +33,12 @@ clear	KEYWORD2
 #######################################
 
 MAX_CHANGES	LITERAL1
-
+MAX_PLUGINS	LITERAL1
+END_PACKET	LITERAL1
+MIN_PACKET	LITERAL1
+OK			LITERAL1
+INVALID_HUMIDITY	LITERAL1
+INVALID_TEMPERATURE	LITERAL1
+INVALID_SYNC		LITERAL1
+ONE			LITERAL1
+ZERO		LITERAL1

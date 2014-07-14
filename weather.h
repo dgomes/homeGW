@@ -12,7 +12,6 @@
 #define INVALID_TEMPERATURE	2
 #define INVALID_SYNC	3
 
-#define END_PACKET	5000
 #define ONE		3000 // 4000 +- 1000
 #define ZERO	1000 // 2000 +- 1000
 
