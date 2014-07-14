@@ -1,15 +1,23 @@
 #include "homeGW.h"
+#include "weather.h"
+#include "door.h"
 
 #define DEBUG
 #define RF_RECEIVER_PIN 3
 
-homeGW station;
+homeGW gw;
+weather station(0x3F);
+door front(0x7F7B04);
+
 
 void setup()
 {
   Serial.begin( 115200 );   //using the serial port at 115200bps for debugging and logging
 
-  station.setup(RF_RECEIVER_PIN, 0x3F);
+  gw.setup(RF_RECEIVER_PIN, 0x3F);
+
+  gw.registerPlugin(72, weather::detectPacket);
+  gw.registerPlugin(48, door::detectPacket);
 }
 
 void loop()
@@ -18,45 +26,51 @@ void loop()
 
   if(station.available()) {
     uint64_t p = 0;
-    if((p = station.getWeatherPacket())) {
-      int r = station.isValidWeather(p);
+    if((p = station.getPacket())) {
+      int r = weather::isValidWeather(p);
 
 	  switch(r) {
-
 		case OK:
-	        Serial.print("{\"code\": 200, \"Humidity\": ");
-			Serial.print(station.getHumidity(p));
+	        Serial.print("{\"id\": \"weather\", \"code\": 200, \"Humidity\": ");
+			Serial.print(weather::getHumidity(p));
 			Serial.print(", \"Temperature\": ");
-			Serial.print(station.getTemperature(p));
+			Serial.print(weather::getTemperature(p));
 #ifdef DEBUG
-    	    Serial.print(String(", \"Channel\": ") + station.getChannel(p));
+    	    Serial.print(String(", \"Channel\": ") + weather::getChannel(p));
 #endif
 			break;
 		case INVALID_HUMIDITY:
-      		Serial.print("{\"code\": 500, \"Humidity\": " + station.getError());
+      		Serial.print("{\"id\": \"weather\", \"code\": 500, \"Humidity\": " + station.getError());
 			break;
 		case INVALID_TEMPERATURE:
-      		Serial.print("{\"code\": 500, \"Temperature\": " + station.getError());
+      		Serial.print("{\"id\": \"weather\", \"code\": 500, \"Temperature\": " + station.getError());
 			break;
 		case INVALID_SYNC:
-      		Serial.print("{\"code\": 500, \"Sync\": false");
+      		Serial.print("{\"id\": \"weather\", \"code\": 500, \"Sync\": false");
 			break;
       }
 #ifdef DEBUG
-    	    Serial.print(", \"Packet\": \"0x");
-    	    Serial.print((long unsigned int) p, HEX);
+   	  Serial.print(", \"Packet\": \"0x");
+   	  Serial.print((long unsigned int) p, HEX);
+	  Serial.print("\"");
 #endif
-	        Serial.println(String("\"}"));
-    } else if((p = station.getDoorPacket())) {
-	  if(p != 0x7F7B04)
-		return;
-      Serial.print("{\"code\": 200, \"DoorOpen\": true");
+	  Serial.println("}");
+    }
+  }
+
+
+  if(front.available()) {
+    uint64_t p = front.getPacket(); //getPacket clears the packet, we keep it to print it further ahead
+    if(front.change(p)) {
+      Serial.print("{\"id\": \"door\", \"code\": 200, \"change\": 1");
+      Serial.println("}");
+    } else {
+      Serial.print("{\"id\": \"door\", \"code\": 500");
 #ifdef DEBUG
       Serial.print(", \"Packet\": \"0x");
       Serial.print((long unsigned int) p, HEX);
+      Serial.println("\"}");
 #endif
-      Serial.println(String("}"));
     }
   }
 }
-
