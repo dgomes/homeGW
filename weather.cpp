@@ -82,10 +82,10 @@ void weather::detectPacket(int bitsRead, unsigned int *timings) {
 	for(int i=1; i< bitsRead; i++) {
 		int duration = timings[i];
 
-		if(duration > ONE) {
+		if(duration > weather::ONE) {
 	      packet = packet << 1;
           bitSet(packet, 0);
-        } else if(duration > ZERO) {
+        } else if(duration > weather::ZERO) {
           packet = packet << 1;
           bitClear(packet, 0);
         }

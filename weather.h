@@ -32,12 +32,12 @@
 #define INVALID_TEMPERATURE	2
 #define INVALID_SYNC	3
 
-#define ONE		3000 // 4000 +- 1000
-#define ZERO	1000 // 2000 +- 1000
-
 class weather {
 
 	private:
+		const static unsigned int ONE = 3000; // 4000 +- 1000
+		const static unsigned int ZERO = 1000; // 2000 +- 1000
+
 		static uint8_t sync;
 		static uint64_t packet;
 
