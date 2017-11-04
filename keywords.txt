@@ -19,8 +19,11 @@ setup	KEYWORD2
 getTemperature	KEYWORD2
 getHumidity	KEYWORD2
 getChannel	KEYWORD2
+getBattery	KEYWORD2
+getId	KEYWORD2
 isValidWeather  KEYWORD2
 getPacket	KEYWORD2
+getString	KEYWORD2
 available  KEYWORD2
 clear	KEYWORD2
 
