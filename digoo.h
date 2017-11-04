@@ -39,7 +39,6 @@ class digoo : public Plugin {
 		const static unsigned int ONE = 1800; 
 		const static unsigned int ZERO = 800;
 		
-		static String error_str;
 	public:
 		digoo();
 
@@ -54,7 +53,6 @@ class digoo : public Plugin {
 		float getTemperature(uint64_t packet);
 		uint8_t getHumidity(uint64_t packet);
 
-		String getError();
 };
 
 #endif

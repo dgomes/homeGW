@@ -22,8 +22,6 @@
 
 Plugin::Plugin() {
 	packet = 0;
-	error = OK;
-	String error_str = "";
 }
 
 Plugin::~Plugin() {
@@ -66,13 +64,9 @@ uint64_t Plugin::getPacket() {
 
 bool Plugin::available() {
   if(Plugin::packet != 0) {
-    if(error == OK)
       return true;
   }
   return false;
 }
 
-uint8_t Plugin::getErrno() {
-  return error;
-}
 

@@ -39,7 +39,6 @@ class weather : public Plugin {
 		const static unsigned int ONE = 3000;
 		const static unsigned int ZERO = 1000; 
 
-		static String error_str;
 	public:
 		weather();
 
@@ -53,7 +52,6 @@ class weather : public Plugin {
 		float getTemperature(uint64_t packet);
 		uint8_t getHumidity(uint64_t packet);
 
-		String getError();
 };
 
 #endif

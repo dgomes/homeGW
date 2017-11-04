@@ -20,8 +20,6 @@
 */
 #include <digoo.h>
 
-String digoo::error_str = "";
-
 digoo::digoo() {
 	packet_size = 36;
     END_PACKET = 3000; 
@@ -58,12 +56,10 @@ uint8_t digoo::isValidWeather(uint64_t ppacket) {
   uint8_t humidity = getHumidity(ppacket);
   //Specs http://www.amazon.co.uk/gp/product/B00327G0MA/ref=oh_details_o00_s00_i00
   if (humidity > 100) { //sanity check according to specs
-    error_str = String(humidity);
     return INVALID_HUMIDITY;
   }
   float temperature = getTemperature(ppacket);
   if (temperature < -20.0 || temperature > 50.0) { //sanity check according to specs
-    error_str = String((int) temperature) + "." + String(((int) (temperature * 10)) % 10);
     return INVALID_TEMPERATURE;
   }
   return OK;
@@ -92,15 +88,3 @@ void digoo::processPacket() {
 	#endif
 }
 
-String digoo::getError() {
-  switch(error) {
-    case INVALID_SYNC:
-      return "Invalid checksum: " + error_str;
-    case INVALID_TEMPERATURE:
-      return "Invalid temperature: " + error_str;
-    case INVALID_HUMIDITY:
-      return "Invalid humidity: " + error_str;
-    default:
-      return "unknown error";
-  }
-}

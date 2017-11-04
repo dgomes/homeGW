@@ -20,8 +20,6 @@
 */
 #include <generic.h>
 
-String generic::error_str = "";
-
 generic::generic() {
 	packet_size = 48;
     END_PACKET = 5000; 
@@ -52,9 +50,3 @@ void generic::processPacket() {
 }
 
 
-String generic::getError() {
-  switch(error) {
-    default:
-      return "unknown error";
-  }
-}

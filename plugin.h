@@ -42,9 +42,6 @@ class Plugin {
 
 		uint64_t packet;
 
-		uint8_t error;
-		String error_str;
-
 		Plugin();
 		virtual ~Plugin();
 
@@ -57,8 +54,6 @@ class Plugin {
 
 		bool available();
 
-		uint8_t getErrno();
-		String getError();
 };
 
 #endif

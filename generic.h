@@ -34,14 +34,12 @@ class generic : public Plugin {
 	private:
 		const static unsigned int AVERAGE = 800; 
 		
-		static String error_str;
 	public:
 		generic();
 
 		static void detectPacket(unsigned int, Plugin *);
 		void processPacket();
 
-		String getError();
 };
 
 #endif
