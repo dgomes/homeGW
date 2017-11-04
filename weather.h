@@ -46,10 +46,12 @@ class weather : public Plugin {
 		static void detectPacket(unsigned int, Plugin *);
 		void processPacket();
 	
-		static uint8_t isValidWeather(uint64_t packet);
-		static uint8_t getChannel(uint64_t packet);
-		static float getTemperature(uint64_t packet);
-		static uint8_t getHumidity(uint64_t packet);
+		uint8_t isValidWeather(uint64_t packet);
+		uint8_t getId(uint64_t packet);
+		uint8_t getChannel(uint64_t packet);
+		uint8_t getBattery(uint64_t packet);
+		float getTemperature(uint64_t packet);
+		uint8_t getHumidity(uint64_t packet);
 
 		String getError();
 };

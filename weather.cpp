@@ -28,9 +28,19 @@ weather::weather() {
 	MIN_PACKET = 250;
 }
 
+uint8_t weather::getId(uint64_t packet) {
+	uint8_t id = (packet >> 24) & 0xFF;
+	return id;
+}
+
+uint8_t weather::getBattery(uint64_t packet) {
+	uint8_t battery = (packet >> 20) & 0x8;
+	return battery ? 1 : 0;
+}
+
 uint8_t weather::getChannel(uint64_t packet) {
-	uint8_t channel = (packet >> 20) && 0xF;
-	return channel;
+	uint8_t channel = (packet >> 20) & 0x3;
+	return channel+1;
 }
 
 float weather::getTemperature(uint64_t packet) {
