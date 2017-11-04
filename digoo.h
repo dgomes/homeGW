@@ -38,8 +38,8 @@
 class digoo : public Plugin {
 
 	private:
-		const static unsigned int ONE = 1900; 
-		const static unsigned int ZERO = 900;
+		const static unsigned int ONE = 1850; 
+		const static unsigned int ZERO = 850;
 		
 		static String error_str;
 	public:
