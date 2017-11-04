@@ -21,8 +21,8 @@
 #include <Plugin.h>
 
 Plugin::Plugin() {
-	uint64_t packet = 0;
-	uint8_t error = OK;
+	packet = 0;
+	error = OK;
 	String error_str = "";
 }
 
@@ -53,6 +53,10 @@ void Plugin::detectPacket(unsigned int duration, Plugin *self ) {
 
 }
 
+String Plugin::getString(uint64_t packet) {
+	String s = "0x";
+	return s + String((long) packet, HEX);
+}
 
 uint64_t Plugin::getPacket() {
   uint64_t p = packet;

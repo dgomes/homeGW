@@ -53,6 +53,7 @@ class Plugin {
 		virtual void processPacket() = 0;
 
 		uint64_t getPacket();
+		String getString(uint64_t packet);
 
 		bool available();
 
