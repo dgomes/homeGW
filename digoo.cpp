@@ -28,9 +28,20 @@ digoo::digoo() {
 	MIN_PACKET = 650;
 }
 
+
+uint8_t digoo::getId(uint64_t packet) {
+  uint8_t id = (packet >> 28) & 0xFF;
+  return id;
+}
+
+uint8_t digoo::getBattery(uint64_t packet) {
+  uint8_t batt = (packet >> 24) & 0x8;
+  return batt ? 1 : 0;
+}
+
 uint8_t digoo::getChannel(uint64_t packet) {
-  uint8_t channel = (packet >> 24) && 0x3;
-  return channel;
+  uint8_t channel = (packet >> 24) & 0x3;
+  return channel+1;
 }
 
 float digoo::getTemperature(uint64_t packet) {
@@ -39,7 +50,7 @@ float digoo::getTemperature(uint64_t packet) {
 }
 
 uint8_t digoo::getHumidity(uint64_t packet) {
-  uint8_t humidity = packet & 0x0000F;
+  uint8_t humidity = packet & 0xFF;
   return humidity;
 }
 
@@ -73,7 +84,11 @@ void digoo::processPacket() {
 	}
 	#ifdef DEBUG
     Serial.print("~0x");
-    Serial.println((long) packet, HEX);
+    Serial.println((unsigned long) packet, HEX);
+	if (packet == 0) {
+		for(unsigned i=0; i < bitsRead; i++)
+			Serial.println(timings[i]);
+	}
 	#endif
 }
 
