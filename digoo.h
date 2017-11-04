@@ -18,8 +18,10 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 */
-#ifndef HomeGW_h
-#define HomeGW_h
+#ifndef digoo_h
+#define digoo_h
+
+#define DEBUG
 
 #if ARDUINO < 100
   #include <WProgram.h>
@@ -29,24 +31,29 @@
 
 #include <plugin.h>
 
+#define INVALID_HUMIDITY	1
+#define INVALID_TEMPERATURE	2
+#define INVALID_SYNC	3
 
-class HomeGW {
+class digoo : public Plugin {
 
 	private:
-		uint8_t pin;
-
-		static uint8_t MAX_PLUGINS; 
-
-		static void handleInterrupt();
-
+		const static unsigned int ONE = 1900; 
+		const static unsigned int ZERO = 900;
+		
+		static String error_str;
 	public:
-		static Plugin **plugin;
-		HomeGW(uint8_t max_plugins);
-		~HomeGW();
-	
-		bool setup(uint8_t pin);
+		digoo();
 
-		void registerPlugin(Plugin *);
+		static void detectPacket(unsigned int, Plugin *);
+		void processPacket();
+
+		static uint8_t isValidWeather(uint64_t packet);
+		static uint8_t getChannel(uint64_t packet);
+		static float getTemperature(uint64_t packet);
+		static uint8_t getHumidity(uint64_t packet);
+
+		String getError();
 };
 
 #endif

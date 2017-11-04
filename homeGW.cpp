@@ -20,66 +20,57 @@
 */
 #include <homeGW.h>
 
-unsigned int homeGW::timings[MAX_CHANGES];
-PacketParser homeGW::plugin[MAX_PLUGINS] = {NULL, NULL};
-unsigned int homeGW::plugin_trigger[MAX_PLUGINS] = {MAX_CHANGES, MAX_CHANGES};
+Plugin **HomeGW::plugin;
+uint8_t HomeGW::MAX_PLUGINS;
 
-void homeGW::registerPlugin(int bits, PacketParser f) {
+HomeGW::HomeGW(uint8_t max_plugins) {
+	MAX_PLUGINS = max_plugins;
+	plugin = new Plugin*[MAX_PLUGINS];
+	for(int i=0; i<MAX_PLUGINS; i++)
+		plugin[i] = NULL; 
+}
+
+HomeGW::~HomeGW() {
+	delete HomeGW::plugin;
+}
+
+
+void HomeGW::registerPlugin(Plugin *p) {
 	for(int i=0; i<MAX_PLUGINS; i++) {
-		if(homeGW::plugin[i] == NULL) {
-			homeGW::plugin[i] = f;
-			homeGW::plugin_trigger[i] = bits;
+		if(plugin[i] == NULL) {
+			plugin[i] = p;
 			return;
 		}
 	}
 
 }
 
-bool homeGW::setup(uint8_t pin, unsigned int sync) {
+bool HomeGW::setup(uint8_t pin) {
   if(!(pin == 3 || pin == 2)) {
     return false;
   }
 
-  homeGW::pin = pin;
+  HomeGW::pin = pin;
 
   pinMode(pin, INPUT);
   digitalWrite(pin, LOW);
 
-  attachInterrupt(pin-2, homeGW::handleInterrupt, CHANGE); // 1 = PIN3
+  attachInterrupt(pin-2, HomeGW::handleInterrupt, CHANGE); // 1 = PIN3
 
   return true;
 }
 
-void homeGW::handleInterrupt() {
+void HomeGW::handleInterrupt() {
   static unsigned long lastTime;
-  static unsigned int bitsRead;
 
   long time = micros();
   unsigned int duration = time - lastTime;
 
-  if(duration > END_PACKET) {
-
-	for(int i=0; i<MAX_PLUGINS; i++) {
-		if(homeGW::plugin_trigger[i] != NULL) {
-			if(bitsRead > homeGW::plugin_trigger[i]-homeGW::plugin_trigger[i]*0.1 && bitsRead < homeGW::plugin_trigger[i]+homeGW::plugin_trigger[i]*0.1) {  //check if we are in the range +- 10%
-				#ifdef DEBUG
-				Serial.println(bitsRead);
-				#endif
-				homeGW::plugin[i](bitsRead, homeGW::timings);
-			}
-		}
+  for(int i=0; i<MAX_PLUGINS; i++) {
+    if(plugin != NULL) {
+		plugin[i]->detectPacket(duration, plugin[i]);
 	}
-    bitsRead = 0;
-
   }
 
-  if(duration > MIN_PACKET) {
-  	homeGW::timings[bitsRead] = duration;
-  	bitsRead++;
-  }
-
-  if(bitsRead == MAX_CHANGES) {
-	bitsRead = 0;
-  }
   lastTime = time;
 }

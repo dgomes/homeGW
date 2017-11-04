@@ -27,36 +27,30 @@
   #include <Arduino.h>
 #endif
 
-#define OK	0
+#include "plugin.h"
+
 #define INVALID_HUMIDITY	1
 #define INVALID_TEMPERATURE	2
 #define INVALID_SYNC	3
 
-class weather {
+class weather : public Plugin {
 
 	private:
-		const static unsigned int ONE = 3000; // 4000 +- 1000
-		const static unsigned int ZERO = 1000; // 2000 +- 1000
+		const static unsigned int ONE = 3000;
+		const static unsigned int ZERO = 1000; 
 
-		static uint8_t sync;
-		static uint64_t packet;
-
-		static uint8_t error;
 		static String error_str;
 	public:
-		weather(uint8_t sync);
+		weather();
 
-		static void detectPacket(int readBits, unsigned int *timings);
-		uint64_t getPacket();
-
+		static void detectPacket(unsigned int, Plugin *);
+		void processPacket();
+	
 		static uint8_t isValidWeather(uint64_t packet);
 		static uint8_t getChannel(uint64_t packet);
 		static float getTemperature(uint64_t packet);
 		static uint8_t getHumidity(uint64_t packet);
 
-		bool available();
-
-		uint8_t getErrno();
 		String getError();
 };
 
