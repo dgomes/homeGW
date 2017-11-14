@@ -21,7 +21,7 @@
 #include <digoo.h>
 
 digoo::digoo() {
-	packet_size = 36;
+	packet_size = 37;
     END_PACKET = 3000; 
 	MIN_PACKET = 650;
 }
