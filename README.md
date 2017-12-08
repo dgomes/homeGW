@@ -11,12 +11,17 @@ The objective of this library is to decode information coming from weather stati
 - Arduino (any kind of Arduino will do)
 - RF 433Mhz Receiver (I recommend a superheterodyne)
 - Breadboard + wires (optianaly a perfboard and soldering iron)
+- Antenna (17,4 cm of straigh wire)
 
 ## Schematics
 
 ![Alt text](/docs/HomeGW.png?raw=true "Schematic")
 
 ## Examples
+
+### dump.ino
+
+This example prints a dump of the raw packet it receives/identifies for each plugin.
 
 ### hass_serial.ino
 
