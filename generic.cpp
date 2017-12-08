@@ -22,7 +22,8 @@
 
 generic::generic() {
 	packet_size = 48;
-    END_PACKET = 5000; 
+    END_PACKET = 5000;
+	MIN_PACKET = 280; 
 }
 
 void generic::processPacket() {
