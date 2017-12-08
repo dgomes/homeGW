@@ -15,7 +15,26 @@ The objective of this library is to decode information coming from weather stati
 
 ## Schematics
 
-![Alt text](/docs/HomeGW.png?raw=true "Schematic")
+![Alt text](docs/HomeGW.png?raw=true "Schematic")
+
+
+## Plugins
+
+### weather
+
+Decodes the "Prologue Temperature Sensor" protocol.
+
+Works with a unbranded weather station sold on ebay.
+
+### digoo
+
+Decodes the "Nexus Temperature & Humidity Sensor" protocol.
+
+Works with Digoo DG-R8H 433MHz Wireless Digital Hygrometer Thermometer Weather Station Outdoor Sensor. You can find it online in several stores.
+
+### generic
+
+This plugin should work with a broad number of OOK based devices such as power plugs and remotes
 
 ## Examples
 
