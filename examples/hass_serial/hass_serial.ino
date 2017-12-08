@@ -3,9 +3,7 @@
 #include <homeGW.h>
 #include <digoo.h>
 #include <weather.h>
-#ifdef REMOTE
 #include <generic.h>
-#endif
 
 HomeGW gw(3); // 3 is the number of plugins to be registered 
 weather station1;
