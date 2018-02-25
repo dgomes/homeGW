@@ -74,7 +74,7 @@ bool HomeGW::setup(uint8_t pin) {
 
   attachInterrupt(interuptPin, HomeGW::handleInterrupt, CHANGE); // 1 = PIN3
 
-  return true
+  return true;
 }
 
 void HomeGW::handleInterrupt() {
