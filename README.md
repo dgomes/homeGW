@@ -8,7 +8,7 @@ The objective of this library is to decode information coming from weather stati
 
 ## Bill of Materials (BOM)
 
-- Arduino (any kind of Arduino will do)
+- Arduino (any kind of Arduino will do, including esp8266)
 - RF 433Mhz Receiver (I recommend a superheterodyne)
 - Breadboard + wires (optianaly a perfboard and soldering iron)
 - Antenna (17,4 cm of straigh wire)
@@ -64,3 +64,7 @@ The example can easily be integrated in a Home Assistant install using the follo
         {{ states.sensor.weatherstation_temperature.state }}
         {% endif %}
       unit_of_measurement: "°C"
+'''
+
+## Contributors
+- Panagiotis (@maragelis)
