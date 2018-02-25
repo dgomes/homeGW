@@ -63,8 +63,8 @@ The example can easily be integrated in a Home Assistant install using the follo
         {% else %}
         {{ states.sensor.weatherstation_temperature.state }}
         {% endif %}
-      unit_of_measurement: "°C"
-'''
+      unit_of_measurement: "°C"
+```
 
 ## Contributors
 - Panagiotis (@maragelis)
