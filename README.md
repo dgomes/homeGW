@@ -6,6 +6,8 @@ A simple and trivial to reproduce HomeGW for cheap 433Mhz based weather stations
 
 The objective of this library is to decode information coming from weather station units which can be found online very cheap.
 
+Furthermore, this library and the example code [hass_serial](https://github.com/dgomes/homeGW/tree/master/examples/hass_serial) can be used with [Home Assistant](http://home-assistant.io) through the use of a [custom component](https://github.com/dgomes/home-assistant-custom-components)
+
 ## Bill of Materials (BOM)
 
 - Arduino (any kind of Arduino will do, including esp8266)
