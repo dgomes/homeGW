@@ -68,5 +68,7 @@ The example can easily be integrated in a Home Assistant install using the follo
       unit_of_measurement: "°C"
 ```
 
+or through the use of a [custom component](https://github.com/dgomes/home-assistant-custom-components)
+
 ## Contributors
 - [Panagiotis](https://github.com/maragelis)
