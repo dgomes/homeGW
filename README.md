@@ -69,4 +69,4 @@ The example can easily be integrated in a Home Assistant install using the follo
 ```
 
 ## Contributors
-- Panagiotis (@maragelis)
+- [Panagiotis](https://github.com/maragelis)
