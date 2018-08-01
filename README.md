@@ -72,3 +72,4 @@ or through the use of a [custom component](https://github.com/dgomes/home-assist
 
 ## Contributors
 - [Panagiotis](https://github.com/maragelis)
+- [aquaticus](https://github.com/aquaticus)
