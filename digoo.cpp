@@ -22,7 +22,7 @@
 
 digoo::digoo() {
 	packet_size = 37;
-    END_PACKET = 3000; 
+    END_PACKET = 3000;
 	MIN_PACKET = 650;
 }
 
@@ -43,7 +43,9 @@ uint8_t digoo::getChannel(uint64_t packet) {
 }
 
 float digoo::getTemperature(uint64_t packet) {
-  float temperature = float((packet >> 12) & 0xFFF) / 10;
+	int16_t t = packet >> 12 & 0x0FFF;
+	t = 0x0800 & t ? 0xF000 | t  : t;
+	float temperature = float(t) / 10;
   return temperature;
 }
 
@@ -87,4 +89,3 @@ void digoo::processPacket() {
 	}
 	#endif
 }
-
