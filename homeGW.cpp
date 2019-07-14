@@ -20,6 +20,12 @@
 */
 #include <homeGW.h>
 
+#if defined(ESP8266) || defined(ESP32)
+    #define ISR_PREFIX ICACHE_RAM_ATTR
+#else
+    #define ISR_PREFIX
+#endif
+
 Plugin **HomeGW::plugin;
 uint8_t HomeGW::MAX_PLUGINS;
 
@@ -77,7 +83,7 @@ bool HomeGW::setup(uint8_t pin) {
   return true;
 }
 
-void HomeGW::handleInterrupt() {
+ISR_PREFIX void HomeGW::handleInterrupt() {
   static unsigned long lastTime;
 
   long time = micros();
