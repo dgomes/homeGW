@@ -32,8 +32,7 @@ void setup() {
 
 void loop() { 
   uint64_t p = 0;
-  StaticJsonBuffer<160> jsonBuffer;
-  JsonObject& root = jsonBuffer.createObject();
+  StaticJsonDocument<160> root;
 
 	if(station1.available()) 
 		if((p = station1.getPacket())) {
@@ -47,7 +46,7 @@ void loop() {
   			root[F("hum")] = station1.getHumidity(p);
   			root[F("raw")] = station1.getString(p);
   
-        root.printTo(Serial);
+        serializeJson(root, Serial);
         Serial.println();
         p = 0;
 		  }
@@ -67,7 +66,7 @@ void loop() {
   			root[F("hum")] = station2.getHumidity(p);
   			root[F("raw")] = station2.getString(p);
   
-    		root.printTo(Serial);
+    		serializeJson(root, Serial);
         Serial.println();
         p = 0;
 		  }
@@ -81,7 +80,7 @@ void loop() {
   			root[F("dev")] = F("generic");
   			root[F("raw")] = remote.getString(p);
   
-    		root.printTo(Serial);
+    		serializeJson(root, Serial);
         Serial.println();
 		  }
       prev_p = p;
