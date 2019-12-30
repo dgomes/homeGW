@@ -1,0 +1,18 @@
+{
+  "name": "homeGW",
+  "keywords": "sensor, temperature",
+  "description": "DG-R8H decoding library",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/dgomes/homeGW.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Diogo Gomes",
+      "url": "http://www.diogogomes.com"
+    }
+  ],
+  "version": "1.0.0"
+}
