@@ -54,7 +54,7 @@ void HomeGW::registerPlugin(Plugin *p) {
 bool HomeGW::setup(uint8_t pin) {
   bool isESP = false;
 
-#if defined(ESP8266)
+#if defined(ESP8266) || defined(ESP32)
   isESP = true;
 #endif
 
