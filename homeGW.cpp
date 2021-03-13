@@ -20,10 +20,12 @@
 */
 #include <homeGW.h>
 
-#if defined(ESP8266) || defined(ESP32)
-    #define ISR_PREFIX ICACHE_RAM_ATTR
+#if defined(ESP8266)
+	#define ISR_PREFIX ICACHE_RAM_ATTR
+#elif defined(ESP32)
+	#define ISR_PREFIX IRAM_ATTR
 #else
-    #define ISR_PREFIX
+	#define ISR_PREFIX
 #endif
 
 Plugin **HomeGW::plugin;
