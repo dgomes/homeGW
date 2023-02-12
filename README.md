@@ -38,6 +38,10 @@ Works with Digoo DG-R8H 433MHz Wireless Digital Hygrometer Thermometer Weather S
 
 This plugin should work with a broad number of OOK based devices such as power plugs and remotes
 
+### fanju 
+
+https://www.chaosgeordend.nl/wordpress/2021/02/18/fanju-temperature-sensor-transmission-protocol/#more-828
+
 ## Examples
 
 ### dump.ino
