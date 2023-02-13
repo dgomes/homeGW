@@ -40,8 +40,7 @@ This plugin should work with a broad number of OOK based devices such as power p
 
 ### fanju 
 
-https://www.chaosgeordend.nl/wordpress/2021/02/18/fanju-temperature-sensor-transmission-protocol/#more-828
-https://github.com/pilight/pilight/pull/464/commits/af617e1b3a939d9d1b2a35ba5bc5a22941fbd910
+Chinese Weather Station Outdoor Sensor. Supports all station within FANJU brand, ex. PT-3378, FJ3378, FJ3391, FJ3389, FJV4
 
 ## Examples
 
