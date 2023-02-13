@@ -46,7 +46,6 @@ uint8_t fanju::getHumidity(uint64_t packet) {
 
 uint8_t fanju::isValidWeather(uint64_t ppacket) {
   uint8_t humidity = getHumidity(ppacket);
-  //Specs http://www.amazon.co.uk/gp/product/B00327G0MA/ref=oh_details_o00_s00_i00
   if (humidity > 100) { //sanity check according to specs
     return INVALID_HUMIDITY;
   }
