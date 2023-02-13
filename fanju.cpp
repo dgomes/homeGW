@@ -62,12 +62,10 @@ void fanju::processPacket() {
   memset(fanju::binarray, 0, sizeof(fanju::binarray));
   uint8_t sync=0;
   uint8_t offset=0;
-  //Serial.println("checking SYNC");
   for(unsigned i=1; i< bitsRead; i++) {
     unsigned duration = timings[i];
     if(duration > fanju::SYNC*0.9 && duration < fanju::SYNC*1.1) {
       sync++;
-      //Serial.print(" ");Serial.print(sync);
       if (sync == 8) {
         //Serial.println(" SYNC detected ");
         offset = i + 1;
@@ -79,17 +77,13 @@ void fanju::processPacket() {
     }
   }
  
-  //Serial.print("offset ");Serial.println(offset);
-  //Serial.print("HEAD offset ");Serial.println(timings[offset]); 
 
   if (timings[offset]     > fanju::HEAD*0.9 && 
       timings[offset]     < fanju::HEAD*1.1) {
     offset++;
-    //Serial.println(" HEAD detected ");
   } else {
     offset = 0;
     sync = 0;
-    //Serial.println(" HEAD not detected ");
     return;
   }
 
