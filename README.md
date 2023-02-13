@@ -38,6 +38,10 @@ Works with Digoo DG-R8H 433MHz Wireless Digital Hygrometer Thermometer Weather S
 
 This plugin should work with a broad number of OOK based devices such as power plugs and remotes
 
+### fanju 
+
+Chinese Weather Station Outdoor Sensor. Supports all station within FANJU brand, ex. PT-3378, FJ3378, FJ3391, FJ3389, FJV4
+
 ## Examples
 
 ### dump.ino
