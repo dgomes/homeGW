@@ -56,12 +56,12 @@ uint8_t digoo::getHumidity(uint64_t packet) {
 
 uint8_t digoo::isValidWeather(uint64_t ppacket) {
   uint8_t humidity = getHumidity(ppacket);
-  //Specs http://www.amazon.co.uk/gp/product/B00327G0MA/ref=oh_details_o00_s00_i00
-  if (humidity > 100) { //sanity check according to specs
+  //humidity sensor HR202L/HR31
+  if (humidity > 90 || humidity < 20) {
     return INVALID_HUMIDITY;
   }
   float temperature = getTemperature(ppacket);
-  if (temperature < -20.0 || temperature > 50.0) { //sanity check according to specs
+  if (temperature < -40.0 || temperature > 90.0) { //sanity check according to specs
     return INVALID_TEMPERATURE;
   }
   return OK;
