@@ -1,6 +1,6 @@
 # Home GW
 
-A simple and trivial to reproduce HomeGW for cheap 433Mhz based weather stations and sensors.
+A simple and trivial to reproduce HomeGW for cheap 433MHz based weather stations and sensors.
 
 ## Introduction
 
@@ -11,9 +11,9 @@ Furthermore, this library and the example code [hass_serial](https://github.com/
 ## Bill of Materials (BOM)
 
 - Arduino (any kind of Arduino will do, including esp8266)
-- RF 433Mhz Receiver (I recommend a superheterodyne)
-- Breadboard + wires (optianaly a perfboard and soldering iron)
-- Antenna (17,4 cm of straigh wire)
+- RF 433MHz Receiver (I recommend a superheterodyne)
+- Breadboard + wires (optionally a perfboard and soldering iron)
+- Antenna (17.4 cm of straight wire)
 
 ## Schematics
 
@@ -26,13 +26,13 @@ Furthermore, this library and the example code [hass_serial](https://github.com/
 
 Decodes the "Prologue Temperature Sensor" protocol.
 
-Works with a unbranded weather station sold on ebay.
+Works with a unbranded weather station sold on eBay.
 
 ### digoo
 
 Decodes the "Nexus Temperature & Humidity Sensor" protocol.
 
-Works with Digoo DG-R8H 433MHz Wireless Digital Hygrometer Thermometer Weather Station Outdoor Sensor. You can find it online in several stores.
+Works with **Digoo DG-R8H** 433MHz Wireless Digital Hygrometer Thermometer Weather Station Outdoor Sensor and **Sencor SWS 21TS**. You can find it online in several stores.
 
 ### generic
 
@@ -58,7 +58,7 @@ The example can easily be integrated in a Home Assistant install using the follo
 - platform: serial
   serial_port: /dev/ttyUSB0
   baudrate: 115200
-  
+
 - platform: template
   sensors:
     weatherstation_temperature:
