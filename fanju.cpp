@@ -1,7 +1,22 @@
 /*
-  Written by Danil Korotkov, spballiance@gmail.com
-  based on digoo.cpp by Diogo Gomes, diogogomes@gmail.com
-  and PiLight project https://github.com/pilight/pilight
+  Written by Diogo Gomes, diogogomes@gmail.com
+
+  Copyright (c) 2014 Diogo Gomes.  All right reserved.
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 */
 #include <fanju.h>
 extern "C"{
@@ -46,6 +61,7 @@ uint8_t fanju::getHumidity(uint64_t packet) {
 
 uint8_t fanju::isValidWeather(uint64_t ppacket) {
   uint8_t humidity = getHumidity(ppacket);
+  //Specs http://www.amazon.co.uk/gp/product/B00327G0MA/ref=oh_details_o00_s00_i00
   if (humidity > 100) { //sanity check according to specs
     return INVALID_HUMIDITY;
   }
@@ -61,10 +77,12 @@ void fanju::processPacket() {
   memset(fanju::binarray, 0, sizeof(fanju::binarray));
   uint8_t sync=0;
   uint8_t offset=0;
+  //Serial.println("checking SYNC");
   for(unsigned i=1; i< bitsRead; i++) {
     unsigned duration = timings[i];
     if(duration > fanju::SYNC*0.9 && duration < fanju::SYNC*1.1) {
       sync++;
+      //Serial.print(" ");Serial.print(sync);
       if (sync == 8) {
         //Serial.println(" SYNC detected ");
         offset = i + 1;
@@ -76,13 +94,17 @@ void fanju::processPacket() {
     }
   }
  
+  //Serial.print("offset ");Serial.println(offset);
+  //Serial.print("HEAD offset ");Serial.println(timings[offset]); 
 
   if (timings[offset]     > fanju::HEAD*0.9 && 
       timings[offset]     < fanju::HEAD*1.1) {
     offset++;
+    //Serial.println(" HEAD detected ");
   } else {
     offset = 0;
     sync = 0;
+    //Serial.println(" HEAD not detected ");
     return;
   }
 

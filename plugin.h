@@ -37,7 +37,7 @@ class Plugin {
 		unsigned int bitsRead;
 		unsigned int packet_size;
 		
-        unsigned int END_PACKET; 
+    unsigned int END_PACKET; 
 		unsigned int MIN_PACKET;
 
 		uint64_t packet;
@@ -47,7 +47,13 @@ class Plugin {
 
 		void detectPacket(unsigned int, Plugin *);
 
-		virtual void processPacket() = 0;
+		virtual void 		processPacket() = 0;
+		virtual uint8_t getChannel(uint64_t packet) = 0;
+		virtual uint8_t isValidWeather(uint64_t packet) = 0;
+		virtual uint8_t getBattery(uint64_t packet) = 0;
+		virtual float 	getTemperature(uint64_t packet) = 0;
+		virtual uint8_t getHumidity(uint64_t packet) = 0;
+		virtual	uint8_t getId(uint64_t packet) = 0;
 
 		uint64_t getPacket();
 		String getString(uint64_t packet);

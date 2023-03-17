@@ -57,7 +57,7 @@ uint8_t digoo::getHumidity(uint64_t packet) {
 uint8_t digoo::isValidWeather(uint64_t ppacket) {
   uint8_t humidity = getHumidity(ppacket);
   //humidity sensor HR202L/HR31
-  if ( (humidity > 90 || humidity < 20) && (humidity != 0) ) { //working range 20%-90% or 0% for temperature only Nexus sensor 
+  if ( (humidity > 100 || humidity < 5) && (humidity != 0) ) { //working range 20%-90% or 0% for temperature only Nexus sensor 
     return INVALID_HUMIDITY;
   }
   float temperature = getTemperature(ppacket);

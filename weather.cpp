@@ -60,7 +60,7 @@ uint8_t weather::getHumidity(uint64_t packet) {
 uint8_t weather::isValidWeather(uint64_t ppacket) {
 	uint8_t humidity = getHumidity(ppacket);
 	//Specs http://www.amazon.co.uk/gp/product/B00327G0MA/ref=oh_details_o00_s00_i00
-	if (humidity > 90  || humidity < 20) { //humidity sensor HR202L/HR31
+	if (humidity > 100) { //humidity sensor HR202L/HR31
 		return INVALID_HUMIDITY;
 	}
 	float temperature = getTemperature(ppacket);
